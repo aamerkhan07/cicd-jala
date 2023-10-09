@@ -6,12 +6,11 @@ pipeline {
   agent any
 
   stages {
-    stage('Checkout') {
-      steps {
-        sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/aamerkhan07/cicd-jala.git'
-      }
-    }
+    stage('Cloning Git') {
+       steps {
+         checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/aamerkhan07/cicd-jala.git/']]])     
+            }
+        }
     stage('Build and Test') {
       steps {
         sh 'ls -ltr'
